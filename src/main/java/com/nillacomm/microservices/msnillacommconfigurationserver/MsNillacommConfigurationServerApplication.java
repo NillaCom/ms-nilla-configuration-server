@@ -8,10 +8,10 @@ import org.springframework.cloud.config.server.EnableConfigServer;
 @SpringBootApplication
 public class MsNillacommConfigurationServerApplication {
 
-	public static void main(String[] args) {
-		var springApplication = new SpringApplication(MsNillacommConfigurationServerApplication.class);
-		springApplication.setAddCommandLineProperties(false);
-		springApplication.run();
-	}
+    public static void main(String[] args) {
+        var springApplication = new SpringApplication(MsNillacommConfigurationServerApplication.class);
+        springApplication.setAddCommandLineProperties(false);
+        springApplication.run();
+    }
 
 }
