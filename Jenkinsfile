@@ -1,5 +1,4 @@
 def appName
-def version
 
 pipeline {
     agent any
@@ -29,7 +28,7 @@ pipeline {
         stage('Build and Push Docker Image') {
             steps {
                 script {
-                    version = sh(script: 'mvn -q exec:exec -Dexec.executable=echo -Dexec.args=\'${project.version}\'', returnStdout: true).trim()
+                    def version = sh(script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true).trim()
                     def imageTag = "${appName}:${version}"
 
                     docker.build(imageTag, '.')
