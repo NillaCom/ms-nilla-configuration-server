@@ -20,13 +20,11 @@ pom.xml.releaseBackup
 # NetBeans files
 /nb-configuration.xml
 /nbactions.xml
-/nb-configuration.xml
 /nb-configuration-private.xml
 /build/
 
 # Gradle files
 .gradle/
-/build/
 
 # OS-specific files
 .DS_Store
@@ -44,16 +42,7 @@ Thumbs.db
 *.tar.gz
 *.rar
 
-# IntelliJ-specific
-.idea/
-
-# Mac OSX specific files
-.DS_Store
-
 # Eclipse specific files
-.classpath
-.project
-.settings/
 .metadata/
 
 # NetBeans specific files
@@ -64,12 +53,5 @@ nb-configuration-private.xml
 
 # Visual Studio Code specific files
 .vscode/
-.settings/
-.gradle/
-.classpath
-.project
-.metadata/
-.gradle/
 bin/
 build/
-*.iml
