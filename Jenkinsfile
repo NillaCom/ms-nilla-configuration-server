@@ -1,3 +1,6 @@
+def appName
+def version
+
 pipeline {
     agent any
 
@@ -15,7 +18,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    def appName = sh(script: 'mvn -q exec:exec -Dexec.executable=echo -Dexec.args=\'${project.artifactId}\'', returnStdout: true).trim()
+                    appName = sh(script: 'mvn -q exec:exec -Dexec.executable=echo -Dexec.args=\'${project.artifactId}\'', returnStdout: true).trim()
                     echo "Application Name: $appName"
 
                     sh 'mvn clean install'
@@ -26,7 +29,7 @@ pipeline {
         stage('Build and Push Docker Image') {
             steps {
                 script {
-                    def version = sh(script: 'mvn -q exec:exec -Dexec.executable=echo -Dexec.args=\'${project.version}\'', returnStdout: true).trim()
+                    version = sh(script: 'mvn -q exec:exec -Dexec.executable=echo -Dexec.args=\'${project.version}\'', returnStdout: true).trim()
                     def imageTag = "${appName}:${version}"
 
                     docker.build(imageTag, '.')
