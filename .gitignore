@@ -1,33 +1,75 @@
-HELP.md
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+# Maven target directory
+/target/
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
+# Maven build files
+pom.xml.backup
+release.properties
+pom.xml.releaseBackup
 
-### IntelliJ IDEA ###
-.idea
-*.iws
+# IDE files
+.idea/
 *.iml
+*.iws
 *.ipr
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
+# Eclipse files
+.classpath
+.project
+.settings/
 
-### VS Code ###
+# NetBeans files
+/nb-configuration.xml
+/nbactions.xml
+/nb-configuration.xml
+/nb-configuration-private.xml
+/build/
+
+# Gradle files
+.gradle/
+/build/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# IntelliJ-specific
+.idea/
+
+# Mac OSX specific files
+.DS_Store
+
+# Eclipse specific files
+.classpath
+.project
+.settings/
+.metadata/
+
+# NetBeans specific files
+.nb-gradle/
+nbactions.xml
+nb-configuration.xml
+nb-configuration-private.xml
+
+# Visual Studio Code specific files
 .vscode/
+.settings/
+.gradle/
+.classpath
+.project
+.metadata/
+.gradle/
+bin/
+build/
+*.iml
