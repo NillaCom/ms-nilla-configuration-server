@@ -18,4 +18,4 @@ EXPOSE 8080
 ENV JAVA_OPTS="-Xms256m -Xmx512m -XX:MaxMetaspaceSize=256m -XX:+UseG1GC -XX:+UseStringDeduplication"
 
 # Command to run the application with garbage collection options
-CMD ["java", "$JAVA_OPTS", "-jar", "target/your-app-name.jar"]
+CMD ["java", "$JAVA_OPTS", "-jar", "target/ms-nillacomm-configuration-server.jar"]
