@@ -4,6 +4,7 @@ pipeline {
     agent any
 
     environment {
+        ECR_REPO_URL = 'https://558084781079.dkr.ecr.eu-west-1.amazonaws.com/nilla'
     }
 
     stages {
@@ -31,7 +32,7 @@ pipeline {
                     def imageTag = "${appName}:${version}"
 
                     docker.build(imageTag, '.')
-                    docker.withRegistry('https://558084781079.dkr.ecr.eu-west-1.amazonaws.com/nilla', 'ecr:EcrCredentials') {
+                    docker.withRegistry('${env.ECR_REPO_URL}', 'ecr:EcrCredentials') {
                         docker.image(imageTag).push()
                     }
                 }
