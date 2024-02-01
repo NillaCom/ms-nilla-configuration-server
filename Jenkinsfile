@@ -1,40 +1,40 @@
 pipeline {
-
     agent any
 
+    environment {
+        ECR_REPO_URL = 'https://558084781079.dkr.ecr.eu-west-1.amazonaws.com/nilla'
+    }
+
     stages {
-
-        stage('Clone') {
+        stage('Checkout') {
             steps {
-                sh  'git clone https://github.com/NillaCom/ms-nillacomm-configuration-server.git'
+                checkout scm
             }
         }
 
-        stage('Maven Build') { 
+        stage('Build') {
             steps {
-                sh 'mvn clean package'
-            }
-        }
-
-        stage('Docker Build') {
-            steps { 
                 script {
-                    app = docker.build("springboot-app") 
+                    def appName = sh(script: 'mvn -q exec:exec -Dexec.executable=echo -Dexec.args=\'${project.artifactId}\'', returnStdout: true).trim()
+                    echo "Application Name: $appName"
+
+                    sh 'mvn clean install'
                 }
             }
         }
 
-        stage('Push to ECR') {
+        stage('Build and Push Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('558084781079.dkr.ecr.eu-west-1.amazonaws.com/nilla/configserver', 'ecr:us-east-1:credentials') {
-                        app.push("${env.BUILD_NUMBER}")
-                        app.push("latest")
+                    def version = sh(script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true).trim()
+                    def imageTag = "${appName}:${version}"
+
+                    docker.build(imageTag, '.')
+                    docker.withRegistry('${env.ECR_REPO_URL}', 'ecr:ECR_CREDENTIALS') {
+                        docker.image(imageTag).push()
                     }
                 }
             }
         }
-
     }
-
 }
