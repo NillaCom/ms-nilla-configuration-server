@@ -6,7 +6,7 @@ pipeline {
 
         stage('Clone') {
             steps {
-                git 'https://github.com/NillaCom/ms-nillacomm-configuration-server.git'
+                sh  'git clone https://github.com/NillaCom/ms-nillacomm-configuration-server.git'
             }
         }
 
