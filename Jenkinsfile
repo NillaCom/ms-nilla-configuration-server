@@ -28,7 +28,7 @@ pipeline {
                     def imageTag = "${appName}:${version}"
 
                     docker.build(imageTag, '.')
-                    docker.withRegistry('https://558084781079.dkr.ecr.eu-west-1.amazonaws.com/nilla', 'ecr:eu-west-1:EcrCredentials') {
+                    docker.withRegistry('https://558084781079.dkr.ecr.eu-west-1.amazonaws.com', 'ecr:eu-west-1:EcrCredentials') {
                         docker.image(imageTag).push()
                     }
                 }
