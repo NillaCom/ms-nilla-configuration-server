@@ -32,7 +32,7 @@ pipeline {
                     def imageTag = "${appName}:${version}"
 
                     docker.build(imageTag, '.')
-                    docker.withRegistry('${env.ECR_REPO_URL}', 'ecr:EcrCredentials') {
+                    docker.withRegistry('${env.ECR_REPO_URL}', 'ecr:eu-west-1:EcrCredentials') {
                         docker.image(imageTag).push()
                     }
                 }
