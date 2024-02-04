@@ -4,7 +4,7 @@ pipeline {
     agent any
 
     environment {
-        ECR_REPO_URL = 'https://558084781079.dkr.ecr.eu-west-1.amazonaws.com/nilla'
+        ECR_REPO_URL = 'https://558084781079.dkr.ecr.eu-west-1.amazonaws.com'
     }
 
     stages {
