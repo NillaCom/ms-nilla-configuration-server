@@ -1,5 +1,5 @@
 def timestamp
-def repoName = 'ms-nillacomm-configuration-server'
+def repoName = 'ms-nilla-configuration-server'
 
 pipeline {
     agent any

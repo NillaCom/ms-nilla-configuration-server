@@ -1,21 +1,14 @@
-# Use the official Amazon Corretto base image
-FROM maven:3.8.3-openjdk-17
+# Use Amazon Corretto as the base image
+FROM amazoncorretto:17-alpine3.19
 
-# Set the working directory inside the container
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy the Maven project files to the container
-COPY pom.xml .
-COPY src ./src
+# Copy the JAR file to the container
+COPY ./target/ms-nilla-configuration-server-1.0.0.jar /app
 
-# Build the application using Maven
-RUN mvn clean install
+# Expose the port the application will run on
+EXPOSE 3000
 
-# Expose the port that your application will run on (adjust as needed)
-EXPOSE 8080
-
-# Garbage collection options
-ENV JAVA_OPTS="-Xms256m -Xmx512m -XX:MaxMetaspaceSize=256m -XX:+UseG1GC -XX:+UseStringDeduplication"
-
-# Command to run the application with garbage collection options
-CMD ["java", "$JAVA_OPTS", "-jar", "target/ms-nillacomm-configuration-server.jar"]
+# Command to run the application
+CMD ["java", "-XX:+UseG1GC", "-XX:MaxGCPauseMillis=100", "-XX:InitiatingHeapOccupancyPercent=70", "-XX:+ExplicitGCInvokesConcurrent", "-jar", "ms-nilla-configuration-server-1.0.0.jar"]

@@ -1,10 +1,10 @@
-package com.nillacomm.microservices.msnillacommconfigurationserver;
+package com.nillacomm.microservices.msnillaconfigurationserver;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MsNillacommConfigurationServerApplicationTests {
+class MsNillaConfigurationServerApplicationTests {
 
     @Test
     void contextLoads() {

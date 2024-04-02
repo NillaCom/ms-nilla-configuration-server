@@ -1,4 +1,4 @@
-package com.nillacomm.microservices.msnillacommconfigurationserver.securities;
+package com.nillacomm.microservices.msnillaconfigurationserver.securities;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,7 +31,7 @@ public class SecurityConfiguration {
         return http.build();
     }
 
-    @Bean(name = "PasswordEncoderBean")
+    @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(4);
     }
