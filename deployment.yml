@@ -62,7 +62,6 @@ metadata:
   labels:
     run: ms-nilla-configuration-server-service
 spec:
-  type: NodePort # Exposes the service externally via a LoadBalancer
   ports:
     - name: ms-nilla-configuration-server-port
       protocol: TCP
