@@ -1,20 +1,20 @@
-# This workfow shows how to build a Docker image, tag and push it to DigitalOcean Container Registry, and
-# deploy the application on a DIgitalOcean Kubernetes cluster. For description to the entire worklow,
+# This workflow shows how to build a Docker image, tag and push it to DigitalOcean Container Registry, and
+# deploy the application on a DigitalOcean Kubernetes cluster. For description to the entire workflow,
 # see www.digitalocean.com/docs/kubernetes/how-to/deploy-using-github-actions.
 
 name: Build, Push, and Deploy
 
 # Controls when the action will run.
 on:
-    # Triggers the workflow on push request on the main branch for changes in the specified paths.
+    # Triggers the workflow on push request on the develop branch for changes in the specified paths.
     push:
         branches:
-            - main
+            - develop
         paths:
             - 'src/**'
             - 'pom.xml'
             - 'Dockerfile'
-            - 'workflow.yml'
+            - '.github/workflows/**'
             - 'deployment.yml'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel.
