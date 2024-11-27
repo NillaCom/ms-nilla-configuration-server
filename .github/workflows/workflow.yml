@@ -2,7 +2,7 @@
 # deploy the application on a DigitalOcean Kubernetes cluster. For description to the entire workflow,
 # see www.digitalocean.com/docs/kubernetes/how-to/deploy-using-github-actions.
 
-name: Build, Push, and Deploy
+name: ms-nilla-configuration-server
 
 # Controls when the action will run.
 on:
