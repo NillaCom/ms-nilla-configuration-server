@@ -26,23 +26,25 @@ spec:
             - containerPort: 8888 # Application port (usually 8080 for Spring Boot)
           env:
             - name: SPRING_PROFILES_ACTIVE
-              value: "developmet" # Example environment variable (adjust for your app's needs)
+              value: "development" # Example environment variable (adjust for your app's needs)
           readinessProbe:
             httpGet:
-              path: /actuator/health
+              path: /actuator/readiness
               port: 8888
-            initialDelaySeconds: 10
-            periodSeconds: 5
-            timeoutSeconds: 2
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            timeoutSeconds: 5
             failureThreshold: 3
+            successThreshold: 1 # if check succeeds for once, we consider the pod is back to normal
           livenessProbe:
             httpGet:
-              path: /actuator/health
+              path: /actuator/liveness
               port: 8888
-            initialDelaySeconds: 15
-            periodSeconds: 5
-            timeoutSeconds: 3
+            initialDelaySeconds: 180
+            periodSeconds: 10
+            timeoutSeconds: 5
             failureThreshold: 3
+            successThreshold: 1 # if check succeeds for once, we consider the pod is back to normal
           resources:
             requests:
               cpu: 100m
@@ -57,11 +59,14 @@ kind: Service
 metadata:
   name: ms-nilla-configuration-server-service
   namespace: nilla
+  labels:
+    run: ms-nilla-configuration-server-service
 spec:
-  selector:
-    app: ms-nilla-configuration-server
+  type: NodePort # Exposes the service externally via a LoadBalancer
   ports:
-    - protocol: TCP
+    - name: ms-nilla-configuration-server-port
+      protocol: TCP
       port: 8888 # Port exposed by the service
       targetPort: 8888 # Port your app is listening on in the container
-  type: LoadBalancer # Exposes the service externally via a LoadBalancer
+  selector:
+    app: ms-nilla-configuration-server
