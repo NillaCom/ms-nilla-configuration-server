@@ -5,7 +5,7 @@ FROM amazoncorretto:17-alpine3.19
 WORKDIR /app
 
 # Copy the JAR file to the container
-COPY ./target/ms-nilla-menu-service-0.0.1.jar /app
+COPY . /app
 
 # Expose the port the application will run on
 EXPOSE 8888
