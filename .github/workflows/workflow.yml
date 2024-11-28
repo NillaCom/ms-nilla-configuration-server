@@ -30,7 +30,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '17'
-          distribution: 'amazoncorretto:17-alpine3.19'
+          distribution: 'amazoncorretto'
 
       # Step 3: Cache Maven dependencies to speed up builds.
       - name: Cache Maven dependencies
