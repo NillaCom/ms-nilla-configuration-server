@@ -51,14 +51,13 @@ jobs:
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
-      # Step 6: Log in to DigitalOcean Container Registry.
+      # Step 6: Build the Docker image for deployment.
+      - name: Build Docker image
+        run: docker build -t ${{ secrets.REGISTRY_NAME }}/ms-nilla-configuration-server:$(echo $GITHUB_SHA | head -c7) .
+
+      # Step 7: Log in to DigitalOcean Container Registry.
       - name: Log in to DigitalOcean Container Registry
         run: doctl registry login --expiry-seconds 1200
-
-      # Step 7: Build the Docker image for deployment.
-      - name: Build Docker image
-        run: |
-          docker build -t ${{ secrets.REGISTRY_NAME }}/ms-nilla-configuration-server:$(echo $GITHUB_SHA | head -c7) .
 
       # Step 8: Push the image to DigitalOcean Container Registry.
       - name: Push image to DigitalOcean Container Registry
@@ -66,12 +65,10 @@ jobs:
 
       # Step 9: Update deployment YAML with the new image tag.
       - name: Update deployment file
-        run: |
-          TAG=$(echo $GITHUB_SHA | head -c7)
-          sed -i 's|<IMAGE>|${{ secrets.REGISTRY_NAME }}/ms-nilla-configuration-server:${TAG}|' $GITHUB_WORKSPACE/deployment.yml
+        run: TAG=$(echo $GITHUB_SHA | head -c7) && sed -i 's|<IMAGE>|${{ secrets.REGISTRY_NAME }}/ms-nilla-configuration-server:'${TAG}'|' $GITHUB_WORKSPACE/deployment.yml
 
       # Step 10: Save Kubernetes kubeconfig with short-lived credentials.
-      - name: Save DigitalOcean kubeconfig
+      - name: Save DigitalOcean kubeconfig with short-lived credentials
         run: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 ${{ secrets.CLUSTER_NAME }}
 
       # Step 11: Deploy to DigitalOcean Kubernetes.
