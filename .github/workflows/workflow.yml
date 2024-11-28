@@ -66,4 +66,4 @@ jobs:
         run: kubectl apply -f $GITHUB_WORKSPACE/deployment.yml
 
       - name: Verify deployment
-        run: kubectl rollout status deployment/ms-nilla-configuration-server
+        run: kubectl rollout status deployment/ms-nilla-configuration-server -n nilla
