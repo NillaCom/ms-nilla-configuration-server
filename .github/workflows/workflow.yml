@@ -30,7 +30,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '17'
-          distribution: 'amazoncorretto'
+          distribution: 'corretto'
 
       # Step 3: Cache Maven dependencies to speed up builds.
       - name: Cache Maven dependencies
